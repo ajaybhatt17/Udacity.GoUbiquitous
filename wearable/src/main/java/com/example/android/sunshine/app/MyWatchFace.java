@@ -444,32 +444,17 @@ public class MyWatchFace extends CanvasWatchFaceService {
                 canvas.drawLine(canvas.getWidth() / 2 - mXOffset, mYOffset + mLineHeight * 2, canvas.getWidth() / 2 + mXOffset,
                         mYOffset + mLineHeight * 2, mDatePaint);
 
-//                if (Utility.isInternetConnected(getApplicationContext())) {
+                if (Utility.isInternetConnected(getApplicationContext())) {
                     displayTempData(canvas);
-//                } else {
-//                    Toast.makeText(getApplicationContext(), R.string.no_connection, Toast.LENGTH_SHORT).show();
-//                }
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.no_connection, Toast.LENGTH_SHORT).show();
+                }
 
             }
         }
 
         private void displayTempData(final Canvas canvas) {
             new AsyncTask<Void, Void, CurrentWeather>() {
-
-                @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                    String highString = Utility.formatTemperature(getApplicationContext(), 21.0f);
-                    String lowString = Utility.formatTemperature(getApplicationContext(), 16.0f);
-                    int weatherId = 501;
-                    canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), Utility.getIconResourceForWeatherCondition(weatherId)),
-
-                            (canvas.getWidth() / 2) - (2.5f * mXOffset), mYOffset + mLineHeight * 2.4f, mHourPaint);
-
-                    canvas.drawText(highString, (canvas.getWidth() / 2) - (0.5f * mXOffset), mYOffset + mLineHeight * 3.6f, mCurrentTempPaint);
-
-                    canvas.drawText(lowString, (canvas.getWidth() / 2) + (1.0f * mXOffset), mYOffset + mLineHeight * 3.6f, mNextTempPaint);
-                }
 
                 @Override
                 protected CurrentWeather doInBackground(Void... params) {
@@ -490,7 +475,7 @@ public class MyWatchFace extends CanvasWatchFaceService {
                 @Override
                 protected void onPostExecute(CurrentWeather weather) {
                     super.onPostExecute(weather);
-                    if (weather != null) {
+                    if (weather != null && weather.getMainInstance() != null) {
                         String highString = Utility.formatTemperature(getApplicationContext(), weather.getMainInstance().getMaxTemperature());
                         String lowString = Utility.formatTemperature(getApplicationContext(), weather.getMainInstance().getMinTemperature());
                         int weatherId = weather.getWeatherInstance(0).getWeatherCode();
