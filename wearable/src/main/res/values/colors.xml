@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#000000</color>
+    <color name="background2">#000088</color>
+    <color name="analog_hands">#cccccc</color>
+    <color name="background_watchface">#29B6F6</color>
+    <color name="digital_am_pm">@color/white</color>
+    <color name="digital_colons">@color/white</color>
+    <color name="digital_minute_hand">#80ffffff</color>
+    <color name="digital_date">#80ffffff</color>
+    <color name="digital_temp">#80ffffff</color>
+</resources>
